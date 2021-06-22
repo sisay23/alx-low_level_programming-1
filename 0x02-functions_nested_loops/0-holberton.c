@@ -1,7 +1,6 @@
 /*
  * File: 0-holberton.c
- * Auth: Brennan D Baraban
- *
+ *  *
  */
 
 #include "holberton.h"
