@@ -1,11 +1,11 @@
 #include "holberton.h"
 
 /**
-  * puts_half - Prints half of a string
-  *
-  *
-  * Return: void
-  */
+ * puts_half - Prints half of a string
+ *
+ *
+ * Return: void
+ */
 void puts_half(char *str)
 {
 	int j = 0;

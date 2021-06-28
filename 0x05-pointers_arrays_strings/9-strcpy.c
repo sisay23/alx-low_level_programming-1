@@ -1,12 +1,12 @@
 #include "holberton.h"
 
 /**
-  * _strcpy - Copy a string
-  *
-  *
-  *
-  * Return: the pointer to dest
-  */
+ * _strcpy - Copy a string
+ *
+ *
+ *
+ * Return: the pointer to dest
+ */
 char *_strcpy(char *dest, char *src)
 {
 	int i;
