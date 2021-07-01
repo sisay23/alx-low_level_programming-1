@@ -1,28 +1,30 @@
 #include "holberton.h"
-#include <stdio.h>
 
 /**
-* length - length str
-* @dest: - pointer
-* Return: length (Success)
-*/
-int length(char *dest)
-{
-	return ((*dest != '\0') ? 1 + length(dest + 1) : 0);
-}
-/**
-* _strncat - ry point
-* @dest: - pointer
-* @src: - pointer
-* @n: - pointer
-* Return: Always 0 (Success)
-*/
+  * _strncat - Concatenates two strings
+  * @dest: The destination value
+  * @src: The source value
+  * @n: The limit of the concatenation
+  *
+  * Return: A pointer to the resulting string dest
+  */
 char *_strncat(char *dest, char *src, int n)
 {
-	int i;
-	const unsigned int log = length(dest);
+	int dlen = 0, j = 0;
 
-	for (i = 0; i < n; i++)
-		*(dest + log + i) = *(src + i);
+	while (dest[dlen])
+	{
+		dlen++;
+	}
+
+	while (j < n && src[j])
+	{
+		dest[dlen] = src[j];
+		dlen++;
+		j++;
+	}
+
+	dest[dlen + n + 1] = '\0';
+
 	return (dest);
 }

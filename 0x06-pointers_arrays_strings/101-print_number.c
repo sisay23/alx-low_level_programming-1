@@ -1,43 +1,31 @@
 #include "holberton.h"
 #include <stdio.h>
 /**
-* get_scale - function that convert a string to an integer.
-* @n: int
-* Return: int
-*/
-int get_scale(int n)
-{
-	if (n > 10)
-		return (10 * get_scale(n / 10));
-	else
-		return (1);
+ * print_number - that prints an integer
+ * @n: number to string
+ * Returnn: nothing
+ */
 
-}
-/**
-* print_number - function that convert a string to an integer.
-* @n: string
-* Return: void
-*/
 void print_number(int n)
 {
-	int scale, unit;
+	int pot_10 = 1, sign = 1, tmp = n;
 
-	if (n < 0)
+	while (tmp / 10)
 	{
-		n *= -1;
+		pot_10 *= 10;
+		tmp /= 10;
+	}
+
+	if (tmp < 0)
+	{
+		sign *= -1;
 		_putchar('-');
 	}
-
-	for (scale = get_scale(n); scale >= 10; scale /= 10)
+	while (pot_10 > 0)
 	{
-		unit = (n / scale);
-		if (unit > 9)
-		{
-			_putchar('0' + (unit / 10));
-			unit = unit % 10;
-		}
-		_putchar('0' + unit);
-		n = n % scale;
+		tmp = n / pot_10;
+		_putchar((tmp * sign) + '0');
+		n = n - (tmp * pot_10);
+		pot_10 /= 10;
 	}
-	_putchar('0' + (n / scale));
 }
