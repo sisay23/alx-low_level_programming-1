@@ -1,54 +1,41 @@
-#include <stdlib.h>
 #include "holberton.h"
 
 /**
- * argstostr - Concatenate all the command line arguments
- * @ac: The number of arguments
- * @av: The arguments
- *
- * Return: Pointer to newly allocated space containing the string,
- * or NULL if failure
- */
+* argstostr - join all arguments in new string
+* @ac: size of arguments
+* @av: arguments
+* Return: new string
+*/
 char *argstostr(int ac, char **av)
 {
-	int i, j;
-	int position = 0, length = 0;
-	char *cat;
+	char *new_string;
+	int i = 0, j = 0, size = 0;
 
-	if (ac == 0 || av == NULL)
+	/* edge case */
+	if (!ac || !av)
 		return (NULL);
 
-	for (i = 0; i < ac; i++)
-		length += _strlen(av[i]);
-
-	cat = malloc(sizeof(char) * (length + ac + 1));
-	if (cat == NULL)
-		return (NULL);
-
-	for (i = 0; i < ac; i++)
+	/* normal case */
+	for (; i < ac; i++, size++)
 	{
-		for (j = 0; av[i][j] != '\0'; j++)
-			cat[position++] = av[i][j];
-
-		cat[position++] = '\n';
+		for (j = 0; av[i][j]; j++, size++)
+		{}
 	}
-	cat[position] = '\0';
 
-	return (cat);
-}
+	new_string = malloc(sizeof(char) * (size + 1));
+	if (!new_string)
+		return (NULL);
 
-/**
- * _strlen - Return the length of a string
- * @s: The string to check
- *
- * Return: The length of the string
- */
-int _strlen(char *s)
-{
-	int i;
+	i = 0, size = 0;
 
-	for (i = 0; s[i] != '\0'; i++)
-		;
+	while (i < ac)
+	{
+		for (j = 0; av[i][j]; j++, size++)
+			new_string[size] = av[i][j];
+		new_string[size++] = '\n';
+		i++;
+	}
 
-	return (i);
+	new_string[size] = '\0';
+	return (new_string);
 }
