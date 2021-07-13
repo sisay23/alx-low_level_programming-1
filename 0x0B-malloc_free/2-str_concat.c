@@ -1,45 +1,39 @@
 #include "holberton.h"
-#include <stdio.h>
 #include <stdlib.h>
 /**
-* lenght - Entry point
-* @string: int
-* Return: Always 0 (Success)
-*/
-int lenght(char *string)
-{
-	return ((*string == '\0') ? 0 : 1 + lenght(string + 1));
-}
-/**
-* str_concat - Entry point
-* @s1: char
-* @s2: char
-* Return: Always 0 (Success)
-*/
+ * str_concat - this function concatante two strings to a new memory position
+ * a blank line
+ *@s1: the string dest
+ *@s2: the string source
+ * Description: this function concatena two strings)?
+ * section header: the header of this function is holberton.h)*
+ * Return: this return a char pointer to the string.
+ */
 char *str_concat(char *s1, char *s2)
 {
-	unsigned int i, j, length_s1 = 0, length_s2 = 0;
-	char *str;
+	char *p;
+	int i, j, k, l;
 
-	if (s1 == NULL)
-		s1 = ("");
+	s1 == NULL ? s1 = "" : s1;
+	s2 == NULL ? s2 = "" : s2;
 
-	if (s2 == NULL)
-		s2 = ("");
+	i = 0, j = 0;
+	while (*(s1 + i) != '\0')
+		i++;
+	while (*(s2 + j) != '\0')
+		j++;
 
-	length_s1 = lenght(s1);
-	length_s2 = lenght(s2);
-	str = malloc(sizeof(char) * (length_s1 + length_s2 - 1));
-
-	if (str == NULL)
+	p = malloc((i * sizeof(*s1)) + (j * sizeof(*s2)) + 1);
+	if (p == NULL)
 		return (NULL);
 
-	for (i = 0; *(s1 + i) != '\0'; i++)
-		*(str + i) = *(s1 + i);
+	for (l = 0, k = 0; l < (i + j + 1); l++)
+	{
+		if (l < i)
+			*(p + l) = *(s1 + l);
+		else
+			*(p + l) = *(s2 + (k++));
+	}
 
-	for (j = 0; *(s2 + j) != '\0'; i++, j++)
-		*(str + i) = *(s2 + j);
-
-	*(str + i) = *(s2 + j);
-	return (str);
+	return (p);
 }
