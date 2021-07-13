@@ -1,44 +1,48 @@
 #include "holberton.h"
+#include <stdio.h>
 #include <stdlib.h>
 /**
- * argstostr - this function concatenates the arguments
- * a blank line
- *@ac: args count
- *@av: args vector
- * Description: this function concatenates the argument)?
- * section header: the header of this function is holberton.h)*
- * Return: this function return a char pointer to the concatenate arguments.
+ * lenght - Entry point
+ * @string: int
+ * Return: Always 0 (Success)
+ */
+int lenght(char *string)
+{
+	return ((*string == '\0') ? 1 : 1 + lenght(string + 1));
+}
+/**
+ * argstostr - Entry point
+ * @ac: int
+ * @av: char
+ * Return: Always 0 (Success)
  */
 char *argstostr(int ac, char **av)
 {
-	char *p, *q;
-	int i, j, result;
+	int i, j, k, lenght_av = 0;
+	char *string;
 
-	if (ac == 0 || av == NULL)
+	if (av == NULL || ac == 0)
 		return (NULL);
-	for (i = 0, result = 0; i < ac; i++, result++)
-	{
-		j = 0;
-		while (*(*(av + i) + j) != '\0')
-		{
-			j++;
-			result++;
-		}
-	}
-	result++;
-	p = malloc(result * sizeof(char));
-	if (p == NULL)
-		return (NULL);
-	q = p;
+
 	for (i = 0; i < ac; i++)
-	{
-		for (j = 0; av[i][j] != '\0'; j++)
+		lenght_av += lenght(*(av + i));
+
+	string = (char *)malloc((lenght_av + 1) * sizeof(char));
+	if (string == NULL)
+		return (NULL);
+
+	k = 0;
+	for (i = 0; i < ac; i++)
+		for (j = 0; *(*(av + i) + j) != '\0'; j++)
 		{
-			*p = av[i][j];
-			p++;
+			*(string + k) = *(*(av + i) + j);
+			if (*(*(av + i) + (j + 1)) == '\0')
+			{
+				*(string + k + 1) = '\n';
+				k += 1;
+			}
+			k += 1;
 		}
-		*p = '\n';
-		p++;
-	}
-	return (q);
+	*(string + k) = '\0';
+	return (string);
 }
