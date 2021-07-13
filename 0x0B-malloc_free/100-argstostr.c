@@ -1,48 +1,46 @@
 #include "holberton.h"
-#include <stdio.h>
 #include <stdlib.h>
+
 /**
- * lenght - Entry point
- * @string: int
- * Return: Always 0 (Success)
- */
-int lenght(char *string)
-{
-	return ((*string == '\0') ? 1 : 1 + lenght(string + 1));
-}
-/**
- * argstostr - Entry point
- * @ac: int
- * @av: char
- * Return: Always 0 (Success)
+ * argstostr - concatenates all the arguments of your program
+ * @ac: argument count in main
+ * @av: arguments passed to main
+ *
+ * Return: Pointer
  */
 char *argstostr(int ac, char **av)
 {
-	int i, j, k, lenght_av = 0;
-	char *string;
+	char *s;
+	int l, lt, i, j, k;
 
-	if (av == NULL || ac == 0)
-		return (NULL);
-
+	if (ac == 0 || av == NULL)
+		return (0);
+	l = 0, k = 0;
 	for (i = 0; i < ac; i++)
-		lenght_av += lenght(*(av + i));
+	{
+		lt = 0;
+		while (av[i][lt])
+			lt++;
+		l += lt + 1;
+	}
+	s = malloc((l + 1) * sizeof(char));
 
-	string = (char *)malloc((lenght_av + 1) * sizeof(char));
-	if (string == NULL)
-		return (NULL);
+	if (s == 0)
+		return (0);
 
-	k = 0;
-	for (i = 0; i < ac; i++)
-		for (j = 0; *(*(av + i) + j) != '\0'; j++)
+	for (j = 0; j < ac; j++)
+	{
+		lt = 0;
+		while (av[j][lt])
 		{
-			*(string + k) = *(*(av + i) + j);
-			if (*(*(av + i) + (j + 1)) == '\0')
-			{
-				*(string + k + 1) = '\n';
-				k += 1;
-			}
-			k += 1;
+			*(s + k) = av[j][lt];
+			k++;
+			lt++;
 		}
-	*(string + k) = '\0';
-	return (string);
+		*(s + k) = '\n';
+		k++;
+	}
+	*(s + k) = '\0';
+
+	return (s);
 }
