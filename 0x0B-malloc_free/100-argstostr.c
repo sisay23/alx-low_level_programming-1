@@ -1,45 +1,54 @@
+#include <stdlib.h>
 #include "holberton.h"
+
 /**
- * argstostr - concatenates all the arguments of your program.
- * @ac: integer.
- * @av: character.
- * Return: ptr pointer.
+ * argstostr - Concatenate all the command line arguments
+ * @ac: The number of arguments
+ * @av: The arguments
+ *
+ * Return: Pointer to newly allocated space containing the string,
+ * or NULL if failure
  */
 char *argstostr(int ac, char **av)
 {
-	char *ptr = NULL;
-	int arg, byte, index, size = ac;
+	int i, j;
+	int position = 0, length = 0;
+	char *cat;
 
 	if (ac == 0 || av == NULL)
-	{
 		return (NULL);
-	}
 
-	for (arg = 0; arg < ac; arg++)
-	{
-		for (byte = 0; av[arg][byte]; byte++)
-		{
-			size++;
-		}
-	}
-	ptr = malloc(sizeof(char) * size + 1);
+	for (i = 0; i < ac; i++)
+		length += _strlen(av[i]);
 
-	if (ptr == NULL)
-	{
+	cat = malloc(sizeof(char) * (length + ac + 1));
+	if (cat == NULL)
 		return (NULL);
-	}
-	index = 0;
 
-	for (arg = 0; arg < ac; arg++)
+	for (i = 0; i < ac; i++)
 	{
-		for (byte = 0; av[arg][byte]; byte++)
-		{
-			ptr[index++] = av[arg][byte];
-		}
+		for (j = 0; av[i][j] != '\0'; j++)
+			cat[position++] = av[i][j];
 
-		ptr[index++] = '\n';
+		cat[position++] = '\n';
 	}
-	ptr[size] = '\0';
+	cat[position] = '\0';
 
-	return (ptr);
+	return (cat);
+}
+
+/**
+ * _strlen - Return the length of a string
+ * @s: The string to check
+ *
+ * Return: The length of the string
+ */
+int _strlen(char *s)
+{
+	int i;
+
+	for (i = 0; s[i] != '\0'; i++)
+		;
+
+	return (i);
 }
