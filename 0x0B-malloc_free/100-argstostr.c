@@ -1,41 +1,44 @@
 #include "holberton.h"
-
+#include <stdlib.h>
 /**
-* argstostr - join all arguments in new string
-* @ac: size of arguments
-* @av: arguments
-* Return: new string
+ * argstostr - this function concatenates the arguments
+(* a blank line
+ *@ac: args count
+ *@av: args vector
+* Description: this function concatenates the argument)?
+(* section header: the header of this function is holberton.h)*
+* Return: this function return a char pointer to the concatenate arguments.
 */
 char *argstostr(int ac, char **av)
 {
-	char *new_string;
-	int i = 0, j = 0, size = 0;
+	char *p, *q;
+	int i, j, result;
 
-	/* edge case */
-	if (!ac || !av)
+	if (ac == 0 || av == NULL)
 		return (NULL);
-
-	/* normal case */
-	for (; i < ac; i++, size++)
+	for (i = 0, result = 0; i < ac; i++, result++)
 	{
-		for (j = 0; av[i][j]; j++, size++)
-		{}
+		j = 0;
+		while (*(*(av + i) + j) != '\0')
+		{
+			j++;
+			result++;
+		}
 	}
-
-	new_string = malloc(sizeof(char) * (size + 1));
-	if (!new_string)
+	result++;
+	p = malloc(result * sizeof(char));
+	if (p == NULL)
 		return (NULL);
-
-	i = 0, size = 0;
-
-	while (i < ac)
+	q = p;
+	for (i = 0; i < ac; i++)
 	{
-		for (j = 0; av[i][j]; j++, size++)
-			new_string[size] = av[i][j];
-		new_string[size++] = '\n';
-		i++;
+		for (j = 0; av[i][j] != '\0'; j++)
+		{
+			*p = av[i][j];
+			p++;
+		}
+		*p = '\n';
+		p++;
 	}
-
-	new_string[size] = '\0';
-	return (new_string);
+	return (q);
 }
