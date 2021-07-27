@@ -1,0 +1,3 @@
+[submodule "printf/alx-low_level_programming"]
+	path = printf/alx-low_level_programming
+	url = https://github.com/non7043/alx-low_level_programming.git
