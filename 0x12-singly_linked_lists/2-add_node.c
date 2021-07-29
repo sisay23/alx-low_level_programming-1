@@ -1,50 +1,40 @@
 #include "lists.h"
+#include <string.h>
+
 /**
- * add_node - add a new node to a list
-(* a blank line
- *@head: the head of list
- *@str: the string to put in the new node
-* Description: add a new node to a list)?
-(* section header: the header of this function is lists.h)*
-* Return: the head of the list.
+ * add_node - Adds a new node at the beginning
+ *            of a list_t list.
+ * @head: A pointer to the head of the list_t list.
+ * @str: The string to be added to the list_t list.
+ *
+ * Return: If the function fails - NULL.
+ *         Otherwise - the address of the new element.
  */
 list_t *add_node(list_t **head, const char *str)
 {
-	list_t *node;
-	char *_str;
+	char *dup;
+	int len;
+	list_t *new;
 
-	if (str == NULL)
+	new = malloc(sizeof(list_t));
+	if (new == NULL)
 		return (NULL);
-	node = malloc(sizeof(list_t));
-	if (node == NULL)
-		return (NULL);
-	_str = strdup(str);
-	if (_str == NULL)
+
+	dup = strdup(str);
+	if (dup == NULL)
 	{
-		free(node);
+		free(new);
 		return (NULL);
 	}
-	node->len = _strlen(_str);
-	node->str = _str;
-	node->next = *head;
-	*head = node;
-	return (*head);
-}
-/**
- * _strlen - this functions prints the lenght of a string
- (* a blank line
- *@s: string to print.
- * Description: this function prints the lenght of a string?
- (* section header: the header of this function is holberton.h)*
- * Return: retunrn the lenght in int
- */
-int _strlen(char *s)
-{
-	if (*s != '\0')
-	{
-		s++;
-		return (1 + _strlen(s));
-	}
-	else
-		return (0);
+
+	for (len = 0; str[len];)
+		len++;
+
+	new->str = dup;
+	new->len = len;
+	new->next = *head;
+
+	*head = new;
+
+	return (new);
 }
