@@ -1,64 +1,49 @@
 #include "lists.h"
+#include <string.h>
+
 /**
- * add_node_end - add a new node to the end of a list
-(* a blank line
- *@head: the head of list
- *@str: the string to put in the new node
-* Description: add a new node to the end of a list)?
-(* section header: the header of this function is lists.h)*
-* Return: the list
+ * add_node_end - Adds a new node at the end
+ *                of a list_t list.
+ * @head: A pointer the head of the list_t list.
+ * @str: The string to be added to the list_t list.
+ *
+ * Return: If the function fails - NULL.
+ *         Otherwise - the address of the new element.
  */
 list_t *add_node_end(list_t **head, const char *str)
 {
-	list_t *node, *tail;
-	char *_str;
+	char *dup;
+	int len;
+	list_t *new, *last;
 
-	tail = *head;
+	new = malloc(sizeof(list_t));
+	if (new == NULL)
+		return (NULL);
 
+	dup = strdup(str);
 	if (str == NULL)
-		return (NULL);
-	node = malloc(sizeof(list_t));
-	if (node == NULL)
-		return (NULL);
-	_str = strdup(str);
-	if (_str == NULL)
 	{
-		free(node);
+		free(new);
 		return (NULL);
 	}
-	node->len = _strlen(_str);
-	node->str = _str;
-	node->next = '\0';
 
-	if (*head == '\0')
-	{
-		*head = node;
-		return (node);
-	}
+	for (len = 0; str[len];)
+		len++;
 
-	while (tail->next)
-		tail = tail->next;
+	new->str = dup;
+	new->len = len;
+	new->next = NULL;
 
-	tail->next = node;
+	if (*head == NULL)
+		*head = new;
 
-	return (tail);
-
-}
-/**
- * _strlen - this functions prints the lenght of a string
- (* a blank line
- *@s: string to print.
- * Description: this function prints the lenght of a string?
- (* section header: the header of this function is holberton.h)*
- * Return: retunrn the lenght in int
- */
-int _strlen(char *s)
-{
-	if (*s != '\0')
-	{
-		s++;
-		return (1 + _strlen(s));
-	}
 	else
-		return (0);
+	{
+		last = *head;
+		while (last->next != NULL)
+			last = last->next;
+		last->next = new;
+	}
+
+	return (*head);
 }
