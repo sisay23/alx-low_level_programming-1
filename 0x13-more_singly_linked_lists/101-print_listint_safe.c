@@ -1,4 +1,5 @@
 #include "lists.h"
+#include "stdio.h"
 /**
  * print_listint_safe - thsi function print a list in safe mode
  * @head: the head of list
@@ -12,6 +13,7 @@ size_t print_listint_safe(const listint_t *head)
 	void *address;
 
 	i = 0;
+
 	while (head != NULL)
 	{
 		difference = head - head->next;
