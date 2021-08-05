@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+/**
+ *generate password
+ *
+ */
+int main
+{
+  int len;
+  int i;
+  
+  len = Username_length
+    For( i = len-1 to 0 and j = 0 len-1)
+    NewPass[j] = Username[i] + i
+}
