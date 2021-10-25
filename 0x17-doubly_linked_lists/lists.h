@@ -3,7 +3,6 @@
 
 /*
  * File: lists.h
- * Auth: Brennan D Baraban
  */
 
 #include <stdio.h>
