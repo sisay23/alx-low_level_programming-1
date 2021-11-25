@@ -1,6 +1,5 @@
 /*
  * File: 103-keygen.c
- * Auth: Brennan D Baraban
  */
 
 #include <stdio.h>
